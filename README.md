@@ -10,5 +10,5 @@ but seems like js is all messed up or plugin isnt linking right so green sock el
 everything else works 
 
  - Green sock has been used to create some text effect
- - ~~animateEnded reads the end of the event to call and trigger openLightbox function
+ - ~~animateEnded reads the end of the event to call and trigger openLightbox function~~
 
