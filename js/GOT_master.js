@@ -9,6 +9,7 @@
 		   topBanners   = document.querySelector('#houseImages'),
 		   tagline      = document.querySelector('.house-name'),
 		   houseInfo    = document.querySelector('.house-info');
+		   headText     = document.querySelector('h1')
 
 	const houseData =[
 		[`stark`, `House Stark of Winterfell is a Great House of Westeros, ruling over the vast region known as the North from their seat in Winterfell. It is one of the oldest lines of Westerosi nobility by far, claiming a line of descent stretching back over eight thousand years. Before the Targaryen conquest, as well as during the War of the Five Kings and Daenerys Targaryen's invasion of Westeros, the leaders of House Stark ruled over the region as the Kings in the North.`],
@@ -18,10 +19,24 @@
 		[`TULLY`, `House Tully of Riverrun is an exiled Great House of Westeros. Its most senior member carried the title of Lord of Riverrun and Lord Paramount of the Trident, until the Red Wedding. The current head is Lord Edmure Tully, son of the late Hoster Tully. The Tully sigil is a silver trout on a red and blue background. Their house words are "Family, Duty, Honor."`],
 		[`ARRYN`, `House Arryn of the Eyrie is one of the Great Houses of Westeros. It has ruled over the Vale of Arryn for millennia, originally as the Kings of Mountain and Vale and more recently as Lords Paramount of the Vale and Wardens of the East under the Targaryen kings and Baratheon-Lannister kings. The nominal head of House Arryn is Robin Arryn, the Lord of the Eyrie, with his stepfather Petyr Baelish acting as Lord Protector until he reaches the age of majority. `],
 		[`TARGERYEN`, `House Targaryen of Dragonstone is a Great House of Westeros and was the ruling royal House of the Seven Kingdoms for three centuries since it conquered and unified the realm, before it was deposed during Robert's Rebellion and House Baratheon replaced it as the new royal House. The few surviving Targaryens fled into exile to the Free Cities of Essos across the Narrow Sea. Currently based on Dragonstone off of the eastern coast of Westeros, House Targaryen seeks to retake the Seven Kingdoms from House Lannister, who formally replaced House Baratheon as the royal House following the destruction of the Great Sept of Baelor.`],
-		[`FREY`, `House Frey of the Twins was the Great House of the Riverlands, having gained their position for their treachery against their former liege lords, House Tully, who were stripped of all their lands and titles for their rebellion against the Iron Throne; House Tully had supported the independence movement for the Kingdom of the North. The current head of the house is unknown following the assassinations of Lord Walder Frey and two of his sons, Lothar Frey and Walder Rivers, by the vengeful Arya Stark. This is made more complex by the subsequent assassination of all the male Freys soon after.`]
+		[`FREY`, `House Frey of the Twins was the Great House of the Riverlands, having gained their position for their treachery against their former liege lords, House Tully, who were stripped of all their lands and titles for their rebellion against the Iron Throne; House Tully had supported the independence movement for the Kingdom of the North. The current head of the house is unknown following the assassinations of Lord Walder Frey and two of his sons, Lothar Frey and Walder Rivers, by the vengeful Arya Stark. This is made more complex by the subsequent assassination of all the male Freys soon after.`],
+
+
+	// const      footerText	= document.querySelector('h1');
+
+			// badge       = document.querySelector('img'),
 
 	];
 
+
+	function animText() {
+		TweenMax.to(headText, 0.7, { scaleX: 1.5, scaleY: 1.5, ease:Elastic.easeInOut});
+
+
+	}
+
+	
+	// this is the openlightbox section
 	function openLightbox() {
 
 		let targetHouse = this.className.split(" ")[1]
@@ -29,6 +44,10 @@
 		// this gives us a lowercase house name -> the second class on all of hte shields ie stark, bartheon
 
 		let targetVid = targetHouse.charAt(0).toUpperCase() + targetHouse.slice(1);
+
+		// sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
+		// setTimeout(function(){ alert("After 5 seconds!"); }, 5000);
+		
 
 		video.src = `video/House-${targetVid}.mp4`;
 		lightbox.classList.add('lightbox-on');
@@ -52,17 +71,32 @@
 
 		topBanners.style.right = currentOffset + "px";
 		// body...
-		sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
+		
+		topBanners.addEventListener('ended', openLightbox);
+		console.log(topBanners)
 
+		// setTimeout(function(){ openLightbox() }, 5000);
 		//change the text content on the page per house 
 		tagline.textContent = `House ${houseData[this.dataset.offset][0]}`;
 		houseInfo.textContent = houseData[this.dataset.offset][1];
 	}
 
+	function animateEnded() {
+		// listen for the transition ended event when clicking sigil
+		console.log('animateEnded');
+		// open the video after lisenting to the end of the event
+		openLightbox()
+	}
 
-	// sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
+
+	sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
 	sigils.forEach(sigil => sigil.addEventListener('click', animateBanners))
+	//when this function ends, it should openLightbox function
 
+	animText();
+
+
+	// headText.addEventListener('click' animText);
 	video.addEventListener('ended', closeLightbox);
 	lbClose.addEventListener('click', closeLightbox);
 })();
