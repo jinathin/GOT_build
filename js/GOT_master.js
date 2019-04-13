@@ -81,12 +81,11 @@
 		houseInfo.textContent = houseData[this.dataset.offset][1];
 	}
 
-	function animateEnded() {
-		// listen for the transition ended event when clicking sigil
-		console.log('animateEnded');
-		// open the video after lisenting to the end of the event
-		openLightbox()
-	}
+	
+
+	// TweenMax.delayedCall(1, myFunction, ["param1", "param2"]);
+
+	// function myFunction(param1, param2) {
 
 
 	sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
