@@ -81,12 +81,13 @@
 		houseInfo.textContent = houseData[this.dataset.offset][1];
 	}
 
-	function animateEnded() {
-		// listen for the transition ended event when clicking sigil
-		console.log('animateEnded');
-		// open the video after lisenting to the end of the event
-		openLightbox()
-	}
+// 	function animateEnded() {
+// 		// listen for the transition ended event when clicking sigil
+// 		console.log('animateEnded');
+// 		// open the video after lisenting to the end of the event
+// 		openLightbox()
+// 	}
+// 	thought this function works but it does not 
 
 
 	sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
